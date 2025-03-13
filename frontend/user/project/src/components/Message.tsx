@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Inbox, Loader2, Mail, User, AlertTriangle } from "lucide-react";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 
 interface Message {
   _id: string;
@@ -18,7 +20,7 @@ function Message() {
     const fetchMessages = async () => {
       try {
         setError(null);
-        const response = await fetch("http://localhost:5000/api/messages");
+        const response = await fetch( `${backendURL}api/messages`);
 
         // Use environment variable
         if (!response.ok) throw new Error("Failed to fetch messages");

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+ // Import backendURL
 
 import { useNavigate } from "react-router-dom"; 
 
@@ -17,8 +19,8 @@ function Login() {
     e.preventDefault();
   
     const endpoint = isLogin
-      ? "http://localhost:5000/api/auth/login"
-      : "http://localhost:5000/api/auth/signup";
+      ? `${backendURL}api/auth/login`
+      : `${backendURL}api/auth/signup`;
   
     const userData = isLogin ? { email, password } : { name, email, password };
   

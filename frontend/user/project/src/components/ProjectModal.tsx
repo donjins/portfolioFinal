@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import React, { useState } from "react";
+import { X } from "lucide-react";
 import axios from "axios";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -9,7 +11,7 @@ interface ProjectModalProps {
     name: string;
     description: string;
     status: string;
-    image: string;
+    image: File | null;
     gitLink: string;
     siteLink: string;
   }) => void;
@@ -20,7 +22,7 @@ export function ProjectModal({ isOpen, onClose, onSubmit }: ProjectModalProps) {
     name: "",
     description: "",
     status: "active",
-    image: "",
+    image: null as File | null, // Corrected type
     gitLink: "",
     siteLink: "",
   });
@@ -29,30 +31,30 @@ export function ProjectModal({ isOpen, onClose, onSubmit }: ProjectModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("description", formData.description);
     formDataToSend.append("status", formData.status);
     formDataToSend.append("gitLink", formData.gitLink);
     formDataToSend.append("siteLink", formData.siteLink);
-  
+
     if (formData.image) {
       formDataToSend.append("image", formData.image);
     }
-  
+
     try {
-      const response = await axios.post("http://localhost:5000/api/projects", formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" }
+      const response = await axios.post( `${backendURL}api/projects`, formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-  
+
       if (response.status === 201) {
         alert("Project added successfully!");
         setFormData({
           name: "",
           description: "",
           status: "active",
-          image: "",
+          image: null,
           gitLink: "",
           siteLink: "",
         });
@@ -65,10 +67,10 @@ export function ProjectModal({ isOpen, onClose, onSubmit }: ProjectModalProps) {
       alert("Something went wrong.");
     }
   };
-  
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md relative">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
@@ -102,7 +104,7 @@ export function ProjectModal({ isOpen, onClose, onSubmit }: ProjectModalProps) {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 GitHub Link
@@ -143,33 +145,32 @@ export function ProjectModal({ isOpen, onClose, onSubmit }: ProjectModalProps) {
                 <option value="on-hold">On Hold</option>
               </select>
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Upload Image
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setFormData((prev) => ({ ...prev, image: file }));
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+
+              {formData.image && (
+                <img
+                  src={URL.createObjectURL(formData.image)}
+                  alt="Uploaded Preview"
+                  className="mt-2 w-32 h-32 object-cover rounded-md"
+                />
+              )}
+            </div>
           </div>
-          <div>
-  <label className="block text-sm font-medium text-gray-700 mb-1">
-    Upload Image
-  </label>
-  <input
-  type="file"
-  accept="image/*"
-  onChange={(e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFormData({ ...formData, image: file });
-    }
-  }}
-  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-  required
-/>
-
-  {formData.image && (
-    <img
-      src={formData.image}
-      alt="Uploaded Preview"
-      className="mt-2 w-32 h-32 object-cover rounded-md"
-    />
-  )}
-</div>
-
           <div className="mt-6">
             <button
               type="submit"

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
 import { ProjectTable } from "./ProjectTable";
 import { ProjectModal } from "./ProjectModal";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 
 const Project: React.FC = () => {
   const [projects, setProjects] = useState([]);
@@ -11,7 +13,7 @@ const Project: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/projects");
+        const response = await fetch( `${backendURL}api/projects`);
         const data = await response.json();
         setProjects(data);
       } catch (error) {
@@ -25,7 +27,7 @@ const Project: React.FC = () => {
   // Function to add a new project
   const handleAddProject = async (project) => {
     try {
-      const response = await fetch("http://localhost:5000/api/projects", {
+      const response = await fetch( `${backendURL}api/projects`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(project),

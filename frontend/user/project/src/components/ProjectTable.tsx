@@ -1,5 +1,7 @@
 import React from 'react';
 import { Pencil, Trash2, Github, Link as LinkIcon } from 'lucide-react';
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 
 interface Project {
   id: string;
@@ -68,7 +70,7 @@ export function ProjectTable({ projects, onEdit, onDelete }: ProjectTableProps) 
                   <div className="h-12 w-12 flex-shrink-0">
                   <img
                       className="h-12 w-12 rounded-lg object-cover"
-                      src={`http://localhost:5000${project.image}`} // Use full backend URL if needed
+                      src={`${backendURL}${project.image}`} // Use full backend URL if needed
                       alt={project.name}
                       onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")} // Fallback image
                     />

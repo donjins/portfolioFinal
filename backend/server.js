@@ -11,17 +11,18 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/portfolioDB";
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" })); // Adjust frontend URL
+app.use(cors({ origin: "http://localhost:5173" })); // Adjust frontend URL if needed
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve images
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static files
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB Connection Error:", err));
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // Import Routes
 const contactRoutes = require("./routes/contactrouter");
@@ -29,7 +30,6 @@ const projectRoutes = require("./routes/projectrouter");
 
 app.use("/api", contactRoutes);
 app.use("/api/projects", projectRoutes);
-
 
 // Start Server
 app.listen(PORT, () => {

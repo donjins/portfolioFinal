@@ -4,6 +4,8 @@ import { useInView } from 'react-intersection-observer';
 import { Github, ExternalLink, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+const backendURL = process.env.REACT_APP_BACKEND_URL;
+
 
 interface Project {
   _id: string;
@@ -27,7 +29,7 @@ export const ProjectsPage: React.FC = () => {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get('http://localhost:5000/api/projects')
+      .get( `${backendURL}api/projects`)
       .then((response) => {
         setProjects(response.data || []); // Fallback to empty array if data is undefined
         setLoading(false);
