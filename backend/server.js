@@ -8,7 +8,8 @@ dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/portfolioDB";
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://josephdondev:CudR7KOYLa72D4HI@cluster0.mongodb.net/JosephPortfolioDB?retryWrites=true&w=majority
+";
 
 // Middleware
 app.use(cors({ origin: "http://localhost:5173" })); // Adjust frontend URL if needed
