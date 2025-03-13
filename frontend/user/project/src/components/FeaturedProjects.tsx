@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+const backendURL = import.meta.env.REACT_APP_BACKEND_URL;
 
 interface Project {
   _id: string;
@@ -89,7 +89,7 @@ export const FeaturedProjects: React.FC = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                 <img
-                  src={`http://localhost:5000${project.image}`}
+                  src={`${backendURL}{project.image}`}
                   alt={project.title}
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
                 />

@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import DashboardCard from "./DashboardCard";
 import { FaUser, FaProjectDiagram, FaEye, FaEnvelope, FaClock } from "react-icons/fa";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+const backendURL = import.meta.env.REACT_APP_BACKEND_URL;
 
 
 function AdminPage() {
@@ -19,7 +19,7 @@ function AdminPage() {
   useEffect(() => {
     const fetchMessageCount = async () => {
       try {
-        const response = await fetch(`${backendURL}/api/messages/count`);
+        const response = await fetch(`${backendURL}api/messages/count`);
         const data = await response.json();
         if (response.ok) {
           setMessageCount(data.count); // ✅ Update state with count
