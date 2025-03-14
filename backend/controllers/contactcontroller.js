@@ -11,19 +11,18 @@ const contactHandler = async (req, res) => {
       senderName: name,
       senderEmail: email,
       message,
-      isRead: false, // Default value
+      isRead: false,
       createdAt: new Date(),
     });
 
     await newMessage.save();
-    console.log("✅ Message saved:", newMessage);
-
     res.status(201).json({ message: "Message sent successfully!" });
   } catch (error) {
     console.error("❌ Contact saving failed:", error);
     res.status(500).json({ error: "Failed to send message" });
   }
 };
+
 
 // ✅ Fetch all messages
 const getMessages = async (req, res) => {
