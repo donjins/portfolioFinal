@@ -15,37 +15,37 @@ const Contact: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isSubmitting) return;
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (isSubmitting) return;
 
-    if (!formData.name || !formData.email || !formData.message) {
-      setMessage({ text: "All fields are required.", type: "error" });
-      return;
+  if (!formData.name || !formData.email || !formData.message) {
+    setMessage({ text: "All fields are required.", type: "error" });
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/contact`, {  // ✅ Use API_BASE_URL
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      setMessage({ text: "Message sent successfully!", type: "success" });
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      setMessage({ text: "Failed to send message. Try again.", type: "error" });
     }
+  } catch (error) {
+    setMessage({ text: "Server error. Please try later.", type: "error" });
+  }
 
-    setIsSubmitting(true);
+  setIsSubmitting(false);
+};
 
-    try {
-      const response = await fetch("https://portfoliofinal-md1h.onrender.com/contact", {...})
-, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setMessage({ text: "Message sent successfully!", type: "success" });
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setMessage({ text: "Failed to send message. Try again.", type: "error" });
-      }
-    } catch (error) {
-      setMessage({ text: "Server error. Please try later.", type: "error" });
-    }
-
-    setIsSubmitting(false);
-  };
 
   return (
     <section className="py-20">
