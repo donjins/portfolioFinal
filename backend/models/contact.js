@@ -8,4 +8,5 @@ const contactSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Contact", contactSchema); // ✅ Capitalized model name
+module.exports = mongoose.model("Contact", contactSchema);
+ // ✅ Capitalized model name
