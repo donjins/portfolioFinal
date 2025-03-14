@@ -39,7 +39,7 @@ const projectRoutes = require("./routes/projectrouter");
 
 app.use("/api", contactRoutes);
 app.use("/api/projects", projectRoutes);
-
+app.post("/contact", contactHandler);
 // Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
