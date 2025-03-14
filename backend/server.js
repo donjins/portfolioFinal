@@ -12,7 +12,12 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://josephdondev:CudR7KOYL
 ";
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" })); // Adjust frontend URL if needed
+app.use(cors({
+  origin: ["https://portfolio-final-five-jade.vercel.app", "http://localhost:5173"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+ // Adjust frontend URL if needed
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static files
 
