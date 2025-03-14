@@ -1,6 +1,5 @@
 const Contact = require("../models/contact"); // ✅ Ensure correct import
 
-// ✅ Handler to save contact messages using Mongoose
 const contactHandler = async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -8,7 +7,6 @@ const contactHandler = async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // ✅ Use Mongoose model to save the message
     const newMessage = new Contact({
       senderName: name,
       senderEmail: email,
@@ -17,7 +15,8 @@ const contactHandler = async (req, res) => {
       createdAt: new Date(),
     });
 
-    await newMessage.save(); // Save to MongoDB
+    await newMessage.save();
+    console.log("✅ Message saved:", newMessage);
 
     res.status(201).json({ message: "Message sent successfully!" });
   } catch (error) {
