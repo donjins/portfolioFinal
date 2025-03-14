@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Send, Phone, Mail, MapPin } from "lucide-react";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
 const Contact: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: "error" | "success" } | null>(null);
@@ -28,7 +27,7 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${backendURL}api/contact`, {
+      const response = await fetch(`${API_BASE_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -60,7 +59,6 @@ const Contact: React.FC = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Get in Touch</h2>
 
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Details */}
             <div className="space-y-8">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
@@ -93,7 +91,6 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
             <motion.form
               onSubmit={handleSubmit}
               className="space-y-6"
@@ -140,7 +137,6 @@ const Contact: React.FC = () => {
                 />
               </div>
 
-              {/* Display Messages */}
               {message && (
                 <p className={`text-sm ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
                   {message.text}
@@ -170,3 +166,4 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+
