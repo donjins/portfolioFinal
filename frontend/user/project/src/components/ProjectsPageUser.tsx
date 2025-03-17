@@ -29,7 +29,7 @@ export const ProjectsPage: React.FC = () => {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get( `${backendURL}/projects`)
+      .get( `${backendURL}/api/projects`)
       .then((response) => {
         setProjects(response.data || []); // Fallback to empty array if data is undefined
         setLoading(false);
