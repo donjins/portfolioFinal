@@ -8,5 +8,9 @@ const contactSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Contact", contactSchema);
+// ✅ Use the correct database and collection
+const Contact = mongoose.model("Contact", contactSchema, "contacts");
+
+module.exports = Contact;
+
  // ✅ Capitalized model name
