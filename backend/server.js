@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI =
   process.env.MONGO_URI ||
-  "mongodb+srv://josephdondev:CudR7KOYLa72D4HI@cluster0.mongodb.net/JosephPortfolioDB?retryWrites=true&w=majority";
+  "mongodb+srv://josephdondev:Mongodb_123@cluster0.mongodb.net/JosephPortfolioDB?retryWrites=true&w=majority";
 
 // Middleware
 app.use(
