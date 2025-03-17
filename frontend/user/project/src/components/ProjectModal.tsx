@@ -44,7 +44,7 @@ export function ProjectModal({ isOpen, onClose, onSubmit }: ProjectModalProps) {
     }
 
     try {
-      const response = await axios.post( `${backendURL}/projects`, formDataToSend, {
+      const response = await axios.post( `${backendURL}/api/projects`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
