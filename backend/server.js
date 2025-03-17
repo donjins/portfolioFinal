@@ -15,9 +15,12 @@ const MONGO_URI =
 // Middleware
 app.use(
   cors({
-    origin: "https://portfolio-final-b04ykahxm-josephdonjins-projects.vercel.app", // Your frontend URL
+    origin: [
+      "https://portfolio-final-b04ykahxm-josephdonjins-projects.vercel.app",
+      "https://portfolio-final-five-jade.vercel.app",
+    ],
     methods: "GET,POST,PUT,DELETE",
-    credentials: true, // If using cookies or authentication
+    credentials: true,
   })
 );
 
