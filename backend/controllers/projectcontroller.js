@@ -20,9 +20,11 @@ exports.createProject = async (req, res) => {
 exports.fetchProjects = async (req, res) => {
   try {
     const projects = await Project.find();
+    console.log("Fetched projects:", projects); // ✅ Log data in the backend console
+
     res.status(200).json(projects);
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching projects:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
