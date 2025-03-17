@@ -29,8 +29,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve s
 
 // Connect to MongoDB
 mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // ✅ Ensures correct connection options
-  .then(() => console.log("✅ MongoDB Connected"))
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // Import Routes
