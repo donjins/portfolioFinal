@@ -13,7 +13,7 @@ const Project: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch( `${backendURL}/projects`);
+        const response = await fetch( `${backendURL}/api/projects`);
         const data = await response.json();
         setProjects(data);
       } catch (error) {
@@ -27,7 +27,7 @@ const Project: React.FC = () => {
   // Function to add a new project
   const handleAddProject = async (project) => {
     try {
-      const response = await fetch( `${backendURL}/projects`, {
+      const response = await fetch( `${backendURL}/api/projects`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(project),
