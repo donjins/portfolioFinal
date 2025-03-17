@@ -5,7 +5,7 @@ let db = null;
 const connectDB = async () => {
   if (db) return; // Prevent multiple connections
 
-  const client = await MongoClient.connect("mongodb://localhost:27017", {
+  const client = await MongoClient.connect("process.env.mongo_uri", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
