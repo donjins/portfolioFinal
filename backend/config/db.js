@@ -1,24 +1,17 @@
-const { MongoClient } = require("mongodb");
-
-let db = null;
+const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  if (db) return; // Prevent multiple connections
-
-  const client = await MongoClient.connect("process.env.MONGO_URI", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-  db = client.db("portfolioDb"); // Make sure this name matches your database
-  console.log("Connected to MongoDB");
-};
-
-const getDB = () => {
-  if (!db) {
-    throw new Error("Database not initialized. Call connectDB() first.");
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Connected to MongoDB");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1); // Exit if DB connection fails
   }
-  return db;
 };
 
-module.exports = { connectDB, getDB };
+module.exports = connectDB;
+
