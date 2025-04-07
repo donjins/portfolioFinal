@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: [
       "https://portfolio-final-b04ykahxm-josephdonjins-projects.vercel.app",
-      "https://portfolio-final-five-jade.vercel.app",
+      "portfolio-final-five-jade.vercel.app",
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
