@@ -27,7 +27,7 @@ export const FeaturedProjects: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get(`${backendURL}api/projects`)
+      .get(`${backendURL}/api/projects`)
       .then((response) => {
         console.log(response.data); // Log the data fetched
         if (Array.isArray(response.data)) {
