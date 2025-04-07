@@ -20,7 +20,7 @@ function Message() {
     const fetchMessages = async () => {
       try {
         setError(null);
-        const response = await fetch( `${backendURL}api/messages`);
+        const response = await fetch( `${backendURL}/api/contacts`);
 
         // Use environment variable
         if (!response.ok) throw new Error("Failed to fetch messages");
