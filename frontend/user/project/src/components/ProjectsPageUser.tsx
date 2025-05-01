@@ -4,8 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Github, ExternalLink, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const backendURL = process.env.REACT_APP_BACKEND_URL;
-
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 interface Project {
   _id: string;
