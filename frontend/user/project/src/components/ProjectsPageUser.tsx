@@ -92,6 +92,7 @@ export const ProjectsPage: React.FC = () => {
                   alt={project.name}
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
                 />
+                console.log(`${backendURL}${project.image}`);
 
 
               </div>
