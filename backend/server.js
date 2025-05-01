@@ -17,12 +17,13 @@ app.use(
   cors({
     origin: [
       "https://portfolio-final-b04ykahxm-josephdonjins-projects.vercel.app",
-      "portfolio-final-five-jade.vercel.app",
+      "https://portfolio-final-five-jade.vercel.app", // ✅ Add https:// here
     ],
-    methods: "GET,POST,PUT,DELETE",
+    methods: ["GET", "POST", "PUT", "DELETE"], // ✅ safer as array
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static files
