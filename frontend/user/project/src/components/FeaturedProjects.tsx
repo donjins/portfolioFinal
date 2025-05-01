@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Github, ExternalLink } from 'lucide-react';
 import axios from 'axios';
-const backendURL = import.meta.env.REACT_APP_BACKEND_URL;
+
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 interface Project {
   _id: string;
@@ -29,31 +29,29 @@ export const FeaturedProjects: React.FC = () => {
     axios
       .get(`${backendURL}/api/projects`)
       .then((response) => {
-        console.log(response.data); // Log the data fetched
         if (Array.isArray(response.data)) {
           const formattedProjects = response.data.map((project) => ({
             _id: project._id,
-            title: project.name, // Use `name` as title
+            title: project.name,
             description: project.description,
             image: project.image,
-            githubLink: project.gitLink, // Use `gitLink` as githubLink
-            demoLink: project.siteLink, // Use `siteLink` as demoLink
-            techStack: [], // Assuming the tech stack is not provided by the API; update if necessary
+            githubLink: project.gitLink,
+            demoLink: project.siteLink,
+            techStack: project.techStack || [], // if available
           }));
           setProjects(formattedProjects);
         } else {
-          setProjects([]); // Handle unexpected data format
+          setProjects([]);
         }
         setLoading(false);
       })
       .catch((err) => {
         setError('Failed to load projects');
         setLoading(false);
-        console.error(err); // Log error if fetching fails
+        console.error(err);
       });
   }, []);
-  
-  
+
   const featuredProjects = projects.slice(0, 3);
 
   if (loading) return <div>Loading...</div>;
@@ -88,11 +86,11 @@ export const FeaturedProjects: React.FC = () => {
                 className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative h-48 overflow-hidden">
-                <img
-                  src={`${backendURL}{project.image}`}
-                  alt={project.title}
-                  className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
-                />
+                  <img
+                    src={`${backendURL}/${project.image}`}
+                    alt={project.title}
+                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
@@ -134,22 +132,8 @@ export const FeaturedProjects: React.FC = () => {
             <div>No featured projects available.</div>
           )}
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex justify-center mt-12"
-        >
-          <Link
-            to="/projects"
-            className="group flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300"
-          >
-            <span>View All Projects</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
 };
+
