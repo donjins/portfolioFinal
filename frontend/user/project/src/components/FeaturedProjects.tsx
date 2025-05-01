@@ -88,10 +88,11 @@ export const FeaturedProjects: React.FC = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={`http://localhost:5000${project.image}`}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
-                  />
+                  src={`${backendURL}${project.image}`} // Dynamically use the backend URL
+                  alt={project.name}
+                  className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                />
+
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
