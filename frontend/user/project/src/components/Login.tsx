@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+const backendURL = import.meta.env.VITE_BACKEND_URL;
  // Import backendURL
 
 import { useNavigate } from "react-router-dom"; 
