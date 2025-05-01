@@ -88,7 +88,7 @@ export const FeaturedProjects: React.FC = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={`${backendURL}/${project.image}`}
+                    src={`http://localhost:5000${project.image}`}
                     alt={project.title}
                     className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
                   />
