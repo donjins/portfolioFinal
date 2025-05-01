@@ -8,14 +8,17 @@ const {
   editProject,
   removeProject,
 } = require("../controllers/projectcontroller.js");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("./cloudinary");
 
 const router = express.Router();
 
 // Multer setup for file uploads
-const storage = multer.diskStorage({
-  destination: "./uploads/", // Save files in 'uploads' folder
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary, // Cloudinary instance
+  params: {
+    folder: "portfolio", // Folder where images will be stored in Cloudinary
+    allowed_formats: ["jpg", "png", "jpeg", "webp"], // Allowed formats
   },
 });
 
