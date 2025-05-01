@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Inbox, Loader2, Mail, User, AlertTriangle } from "lucide-react";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 
 interface Message {
