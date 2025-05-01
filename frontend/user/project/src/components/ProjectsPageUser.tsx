@@ -88,10 +88,11 @@ export const ProjectsPage: React.FC = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                 <img
-                   src={`http://localhost:5000${project.image}`}
+                  src={`${backendURL}${project.image}`} // Dynamically use the backend URL
                   alt={project.name}
                   className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
                 />
+
               </div>
 
                 <div className="p-6">
