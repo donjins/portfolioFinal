@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pencil, Trash2, Github, Link as LinkIcon } from 'lucide-react';
-const backendURL = process.env.REACT_APP_BACKEND_URL;
-
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 interface Project {
   id: string;
