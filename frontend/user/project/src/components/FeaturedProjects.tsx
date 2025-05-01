@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const backendURL = import.meta.env.VITE_BACKEND_URL;
+const backendURL = import.meta.env.VITE_BACKEND_URL; // VITE_ prefix for Vite apps
 
 interface Project {
   _id: string;
@@ -37,7 +38,7 @@ export const FeaturedProjects: React.FC = () => {
             image: project.image,
             githubLink: project.gitLink,
             demoLink: project.siteLink,
-            techStack: project.techStack || [], // if available
+            techStack: project.techStack || [],
           }));
           setProjects(formattedProjects);
         } else {
@@ -132,6 +133,24 @@ export const FeaturedProjects: React.FC = () => {
             <div>No featured projects available.</div>
           )}
         </motion.div>
+
+        {/* View All Projects Button */}
+        {featuredProjects.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-12 flex justify-center"
+          >
+            <Link
+              to="/projects"
+              className="group flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300"
+            >
+              <span>View All Projects</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
