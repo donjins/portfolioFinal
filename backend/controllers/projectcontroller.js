@@ -4,7 +4,7 @@ const Project = require("../models/project.js");
 exports.createProject = async (req, res) => {
   try {
     const { name, description, status, gitLink, siteLink } = req.body;
-    const image = req.file ? `/uploads/${req.file.filename}` : ""; // Save uploaded image path
+    const image = req.file ? req.file.path : ""; // Save uploaded image path
 
     const newProject = new Project({ name, description, status, image, gitLink, siteLink });
     await newProject.save();
