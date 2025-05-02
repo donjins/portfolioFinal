@@ -87,11 +87,12 @@ export const FeaturedProjects: React.FC = () => {
                 className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                  src={`${backendURL}${project.image}`} // Dynamically use the backend URL
-                  alt={project.name}
-                  className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
-                />
+                   <img
+                    className="h-12 w-12 rounded-lg object-cover"
+                    src={project.image} // Cloudinary URL
+                    alt={project.name}
+                    onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")} // Fallback in case of error
+                  />
 
                 </div>
                 <div className="p-6">
