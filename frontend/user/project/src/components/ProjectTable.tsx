@@ -68,11 +68,11 @@ export function ProjectTable({ projects, onEdit, onDelete }: ProjectTableProps) 
                 <div className="flex items-center">
                   <div className="h-12 w-12 flex-shrink-0">
                   <img
-                      className="h-12 w-12 rounded-lg object-cover"
-                      src={`${backendURL}${project.image}`} // Use full backend URL if needed
-                      alt={project.name}
-                      onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")} // Fallback image
-                    />
+                    className="h-12 w-12 rounded-lg object-cover"
+                    src={project.image} // Cloudinary URL
+                    alt={project.name}
+                    onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")} // Fallback in case of error
+                  />
 
 
                   </div>
