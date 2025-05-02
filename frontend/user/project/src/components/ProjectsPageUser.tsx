@@ -88,7 +88,7 @@ export const ProjectsPage: React.FC = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                <img
-                    className="h-12 w-12 rounded-lg object-cover"
+                    className="h-full w-full object-cover transform hover:scale-110 transition-transform duration-300"
                     src={project.image} // Cloudinary URL
                     alt={project.name}
                     onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")} // Fallback in case of error
