@@ -88,10 +88,11 @@ export const ProjectsPage: React.FC = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                <img
-                  src={`${backendURL}${project.image}`} // Dynamically use the backend URL
-                  alt={project.name}
-                  className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
-                />
+                    className="h-12 w-12 rounded-lg object-cover"
+                    src={project.image} // Cloudinary URL
+                    alt={project.name}
+                    onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")} // Fallback in case of error
+                  />
                 console.log(`${backendURL}${project.image}`);
 
 
