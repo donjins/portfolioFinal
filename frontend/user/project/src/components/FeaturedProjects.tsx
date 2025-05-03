@@ -53,7 +53,8 @@ export const FeaturedProjects: React.FC = () => {
       });
   }, []);
 
-  const featuredProjects = projects.slice(0, 3);
+  const featuredProjects = projects.slice(-3);
+
 
  if (loading) {
   return (
