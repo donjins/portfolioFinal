@@ -45,7 +45,35 @@ export const ProjectsPage: React.FC = () => {
     console.log('Projects state:', projects); // Log the state whenever it changes
   }, [projects]);
 
-  if (loading) return <div>Loading...</div>;
+ if (loading) {
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-4">
+        <div className="text-3xl font-bold text-center mb-12">Featured Projects</div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg animate-pulse"
+            >
+              <div className="h-48 bg-gray-300 dark:bg-gray-700" />
+              <div className="p-6">
+                <div className="h-6 bg-gray-300 dark:bg-gray-600 mb-4 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 dark:bg-gray-600 mb-4 rounded w-full"></div>
+                <div className="h-4 bg-gray-300 dark:bg-gray-600 mb-2 rounded w-5/6"></div>
+                <div className="flex gap-2 mt-4">
+                  <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                  <div className="h-8 w-20 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
   if (error) return <div>{error}</div>;
 
   return (
