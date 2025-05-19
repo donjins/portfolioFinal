@@ -89,7 +89,7 @@ export const Hero: React.FC = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href=".JOSEPH DON JINS RESUME.pdf"  // Ensure this is the correct path to your file
+              href="./Joseph_Don_Jins_Resume.pdf"  // Ensure this is the correct path to your file
               download // This attribute triggers a download when the link is clicked
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full hover:shadow-lg transition-all duration-300"
             >
